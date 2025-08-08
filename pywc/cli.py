@@ -22,7 +22,7 @@ def get_number_of_bytes(file_name: Path):
 
 def get_number_of_lines(file_name: Path):
     """
-    Function to get the total nuumber of lines in the file
+    Function to get the total number of lines in the file
     :param file_name:
     :return:
     """
@@ -46,7 +46,7 @@ def get_number_of_lines(file_name: Path):
 
 def count_words(file_name: Path):
     """
-    Function to get the total nuumber of lines in the file
+    Function to get the total number of words in the text file
     :param file_name:
     :return:
     """
@@ -56,6 +56,21 @@ def count_words(file_name: Path):
             words = f.read().split()
 
         return len(words)
+
+    except FileNotFoundError:
+        print(f"Error {file_name} not found", file=sys.stderr)
+        sys.exit(1)
+
+    except Exception as e:
+        print(f"{type(e)}Error, {e}", file=sys.stderr)
+        sys.exit(1)
+
+def get_number_of_characters(file_name: Path):
+
+    try:
+        text = file_name.read_text(encoding="utf-8", errors="replace")
+
+        return len(text)
 
     except FileNotFoundError:
         print(f"Error {file_name} not found", file=sys.stderr)
